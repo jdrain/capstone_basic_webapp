@@ -11,4 +11,4 @@
 **Setup:**
 
 Install mongo by following these [instructions](https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-ubuntu/).
-Then, run `npm install`
+Then, run `npm install` and create a configuration file.

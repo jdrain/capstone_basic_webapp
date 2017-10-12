@@ -9,6 +9,8 @@
   "author": "Jason Drain <jason.bensley.drain@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^2.2.31"
+    "express": "^4.16.2",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.12.1"
   }
 }
