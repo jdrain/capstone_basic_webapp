@@ -1,13 +1,12 @@
 // server.js
 
 // call the packages we need
-var express    = require('express');        // call express
-var app        = express();                 // define our app using express
+var express = require('express');
+var app = express();
 var bodyParser = require('body-parser');
-var driver   = require("./database_client/driver.js");
+var driver = require("./database_client/driver.js");
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+// configure app to use bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -17,8 +16,13 @@ var router = express.Router();
 // get data from the database
 router.get('/get_data/:list_name', function(req, res) {
     var lname = req.params.list_name; // query db for this list
+
     driver.findDocument({"name": lname}, function(resp) {
-        res.json(resp);
+        if (resp.length > 0) {
+            res.json(resp);
+        } else {
+            res.json({"Error": `No list found with name: ${lname}`})
+        }
     });
 });
 
@@ -38,6 +42,7 @@ router.post('/post_data/', function(req, res) {
     }
 })
 
+// all endpoints are prepended with '/api'
 app.use('/api', router);
 
 // START THE SERVER

@@ -17,16 +17,16 @@ var driver = {};
 
 // Get the documents collection
 driver.findDocument = function(query, callback) {
-  MongoClient.connect(url, function(err, db) {
-      var collection = db.collection("documents");
-      // Find some documents
-      collection.find(query).toArray(function(err, doc) {
-          assert.equal(err, null);
-          console.log(doc)
-          callback(doc);
-      });
-      db.close();
-  });
+
+    MongoClient.connect(url, function(err, db) {
+        var collection = db.collection("documents");
+        // find a document
+        collection.find(query).toArray(function(err, doc) {
+            assert.equal(err, null);
+            callback(doc);
+        });
+        db.close();
+    });
 }
 
 // insert some docs
@@ -35,10 +35,9 @@ driver.insertDocument = function(doc, callback) {
     MongoClient.connect(url, function(err, db) {
         assert.equal(err, null);
         var collection = db.collection("documents");
-
+        // insert a document
         collection.insert(doc, function(err, result) {
              assert.equal(err, null);
-             console.log("Inserted doc successfully");
              callback(result);
         });
         db.close();
