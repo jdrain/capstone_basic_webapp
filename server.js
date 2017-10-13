@@ -1,15 +1,11 @@
-// server.js
+/**
+ * An express server to serve as an API for the web app
+ */
 
-// call the packages we need
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var driver = require("./database_client/driver.js");
-
-// configure app to use bodyParser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 var port = process.env.SERVER_PORT;
 var router = express.Router();
 
@@ -28,7 +24,7 @@ router.get('/get_data/:list_name', function(req, res) {
 
 // post data to the database
 router.post('/post_data/', function(req, res) {
-    var data = req.body
+    var data = req.body;
 
     // error handle
     if (data.name === undefined) {
@@ -45,6 +41,15 @@ router.post('/post_data/', function(req, res) {
 // all endpoints are prepended with '/api'
 app.use('/api', router);
 
-// START THE SERVER
+// add directories with the files we need
+app.use(express.static("public"));
+app.use(express.static("style"));
+app.use(express.static("scripts"));
+
+// use bodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Start the server instance
 app.listen(port);
 console.log(`Server is listening on port ${port}`);
