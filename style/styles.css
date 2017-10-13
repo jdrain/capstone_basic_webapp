@@ -1,0 +1,26 @@
+html {
+    font-family: "Courier", "monospace";
+    padding: 30px 30px 50px 50px;
+}
+
+div {
+    text-align:center;
+    padding: 20px 20px 100px 100px;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+#listContents, #Result {
+    width: 170px;
+    height: 100px;
+}
+
+#saveList {
+    float:left;
+}
+
+#findList {
+    float:left;
+}
